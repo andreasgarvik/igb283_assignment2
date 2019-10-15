@@ -17,7 +17,7 @@ public class QutJr : MonoBehaviour
 	private float minBaseAngle = -0.5f;
 	private float LowerArmSpeed = 3f;
 	private float UpperArmSpeed = 2f;
-	private float BaseSpeed = 2f;
+	private float BaseSpeed = 1f;
 	void Start()
 	{
 		limbs = new Limb[4];
