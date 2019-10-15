@@ -22,7 +22,7 @@ public class Limb : MonoBehaviour
 		}
 	}
 
-	private void DrawLimb()
+	public void DrawLimb()
 	{
 		gameObject.AddComponent<MeshFilter>();
 		gameObject.AddComponent<MeshRenderer>();

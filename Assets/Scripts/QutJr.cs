@@ -8,20 +8,23 @@ public class QutJr : MonoBehaviour
 	public int limbsCount = 4;
 	public Material material;
 
-	private Limb[] limbs;
+	private Limb[] limbs = new Limb[4];
 	private float maxLowerArmAngle = 1f;
 	private float minLowerArmAngle = -1f;
 	private float maxUpperArmAngle = 1f;
 	private float minUpperArmAngle = 0;
 	private float maxBaseAngle = 1f;
 	private float minBaseAngle = -0.5f;
-	private float LowerArmSpeed = 3f;
+	private float LowerArmSpeed = 2f;
 	private float UpperArmSpeed = 2f;
 	private float BaseSpeed = 1f;
+
+	private float maxX = 6f;
+	private float minX = -6f;
+	private float positionX = 0;
+	public float translationSpeedX = 0.005f;
 	void Start()
 	{
-		limbs = new Limb[4];
-
 		// Head
 		Limb l1 = Instantiate(limb).GetComponent<Limb>();
 		l1.jointLocation = new Vector3(0, 0, 1);
@@ -84,7 +87,12 @@ public class QutJr : MonoBehaviour
 
 	void Update()
 	{
+		// Movement
+
+		Limb Head = limbs[0];
 		Limb LowerArm = limbs[1];
+		Limb UpperArm = limbs[2];
+		Limb Base = limbs[3];
 
 		LowerArm.angle += LowerArmSpeed * Time.deltaTime;
 
@@ -97,8 +105,6 @@ public class QutJr : MonoBehaviour
 		LowerArm.mesh.RecalculateBounds();
 		LowerArm.lastAngle = LowerArm.angle;
 
-		Limb UpperArm = limbs[2];
-
 		UpperArm.angle += UpperArmSpeed * Time.deltaTime;
 
 		UpperArm.angle = UpperArm.angle >= maxUpperArmAngle ? maxUpperArmAngle : UpperArm.angle;
@@ -110,8 +116,6 @@ public class QutJr : MonoBehaviour
 		UpperArm.mesh.RecalculateBounds();
 		UpperArm.lastAngle = UpperArm.angle;
 
-		Limb Base = limbs[3];
-
 		Base.angle += BaseSpeed * Time.deltaTime;
 
 		Base.angle = Base.angle >= maxBaseAngle ? maxBaseAngle : Base.angle;
@@ -120,7 +124,21 @@ public class QutJr : MonoBehaviour
 		BaseSpeed = Base.angle < maxBaseAngle && Base.angle > minBaseAngle ? BaseSpeed : -BaseSpeed;
 
 		Base.child.GetComponent<Limb>().RotateAroundPoint(Base.jointLocation, Base.angle, Base.lastAngle);
-		Base.mesh.RecalculateBounds();
 		Base.lastAngle = Base.angle;
+
+		// Translation
+		positionX = positionX >= maxX ? maxX : positionX;
+		positionX = positionX <= minX ? minX : positionX;
+
+		translationSpeedX = positionX < maxX && positionX > minX ? translationSpeedX : -translationSpeedX;
+
+		positionX += Time.deltaTime * translationSpeedX;
+
+		Base.DrawLimb();
+		Base.MoveByOffset(new Vector3(positionX, 0, 0));
+
+		LowerArm.mesh.RecalculateBounds();
+		UpperArm.mesh.RecalculateBounds();
+		Base.mesh.RecalculateBounds();
 	}
 }
