@@ -91,6 +91,5 @@ public class Limb : MonoBehaviour
 		{
 			child.GetComponent<Limb>().RotateAroundPoint(point, angle, lastAngle);
 		}
-
 	}
 }

@@ -9,11 +9,15 @@ public class QutJr : MonoBehaviour
 	public Material material;
 
 	private Limb[] limbs;
-	private float maxAngle = 1f;
-	private float minAngle = -1f;
+	private float maxLowerArmAngle = 1f;
+	private float minLowerArmAngle = -1f;
+	private float maxUpperArmAngle = 1f;
+	private float minUpperArmAngle = 0;
+	private float maxBaseAngle = 1f;
+	private float minBaseAngle = -0.5f;
 	private float LowerArmSpeed = 3.14f;
 	private float UpperArmSpeed = 2.07f;
-	private float BaseArmSpeed = 1.035f;
+	private float BaseSpeed = 2.07f;
 	void Start()
 	{
 		limbs = new Limb[4];
@@ -84,10 +88,10 @@ public class QutJr : MonoBehaviour
 
 		LowerArm.angle += LowerArmSpeed * Time.deltaTime;
 
-		LowerArm.angle = LowerArm.angle >= maxAngle ? maxAngle : LowerArm.angle;
-		LowerArm.angle = LowerArm.angle <= minAngle ? minAngle : LowerArm.angle;
+		LowerArm.angle = LowerArm.angle >= maxLowerArmAngle ? maxLowerArmAngle : LowerArm.angle;
+		LowerArm.angle = LowerArm.angle <= minLowerArmAngle ? minLowerArmAngle : LowerArm.angle;
 
-		LowerArmSpeed = LowerArm.angle < maxAngle && LowerArm.angle > minAngle ? LowerArmSpeed : -LowerArmSpeed;
+		LowerArmSpeed = LowerArm.angle < maxLowerArmAngle && LowerArm.angle > minLowerArmAngle ? LowerArmSpeed : -LowerArmSpeed;
 
 		LowerArm.child.GetComponent<Limb>().RotateAroundPoint(LowerArm.jointLocation, LowerArm.angle, LowerArm.lastAngle);
 		LowerArm.mesh.RecalculateBounds();
@@ -97,13 +101,26 @@ public class QutJr : MonoBehaviour
 
 		UpperArm.angle += UpperArmSpeed * Time.deltaTime;
 
-		UpperArm.angle = UpperArm.angle >= maxAngle ? maxAngle : UpperArm.angle;
-		UpperArm.angle = UpperArm.angle <= minAngle ? minAngle : UpperArm.angle;
+		UpperArm.angle = UpperArm.angle >= maxUpperArmAngle ? maxUpperArmAngle : UpperArm.angle;
+		UpperArm.angle = UpperArm.angle <= minUpperArmAngle ? minUpperArmAngle : UpperArm.angle;
 
-		UpperArmSpeed = UpperArm.angle < maxAngle && UpperArm.angle > minAngle ? UpperArmSpeed : -UpperArmSpeed;
+		UpperArmSpeed = UpperArm.angle < maxUpperArmAngle && UpperArm.angle > minUpperArmAngle ? UpperArmSpeed : -UpperArmSpeed;
 
 		UpperArm.child.GetComponent<Limb>().RotateAroundPoint(UpperArm.jointLocation, UpperArm.angle, UpperArm.lastAngle);
 		UpperArm.mesh.RecalculateBounds();
 		UpperArm.lastAngle = UpperArm.angle;
+
+		Limb Base = limbs[3];
+
+		Base.angle += BaseSpeed * Time.deltaTime;
+
+		Base.angle = Base.angle >= maxBaseAngle ? maxBaseAngle : Base.angle;
+		Base.angle = Base.angle <= minBaseAngle ? minBaseAngle : Base.angle;
+
+		BaseSpeed = Base.angle < maxBaseAngle && Base.angle > minBaseAngle ? BaseSpeed : -BaseSpeed;
+
+		Base.child.GetComponent<Limb>().RotateAroundPoint(Base.jointLocation, Base.angle, Base.lastAngle);
+		Base.mesh.RecalculateBounds();
+		Base.lastAngle = Base.angle;
 	}
 }
