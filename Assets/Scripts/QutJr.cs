@@ -132,10 +132,16 @@ public class QutJr : MonoBehaviour
 
 		translationSpeedX = positionX < maxX && positionX > minX ? translationSpeedX : -translationSpeedX;
 
-		positionX += Time.deltaTime * translationSpeedX;
+		positionX = translationSpeedX * 20.0f;
 
-		Base.DrawLimb();
-		Base.MoveByOffset(new Vector3(positionX, 0, 0));
+		//moving left and right
+
+		 if (Input.GetKey(KeyCode.D)) {
+         Base.MoveByOffset(new Vector3(positionX, 0, 0));
+     }   else if (Input.GetKey(KeyCode.A)){
+		 Base.MoveByOffset(new Vector3(-positionX, 0, 0));
+     }
+		
 
 		LowerArm.mesh.RecalculateBounds();
 		UpperArm.mesh.RecalculateBounds();
