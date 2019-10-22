@@ -49,7 +49,8 @@ public class Limb : MonoBehaviour
 	public void MoveByOffset(Vector3 offset)
 	{
 		Matrix3x3 T = Matrix3x3.Translate(offset);
-		Vector3[] vertices = mesh.vertices;
+		Vector3[] vertices = 
+		mesh.vertices;
 
 		for (int i = 0; i < vertices.Length; i++)
 		{
