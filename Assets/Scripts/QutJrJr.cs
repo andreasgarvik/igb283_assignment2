@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QutJr : MonoBehaviour
+public class QutJrJr : MonoBehaviour
 {
 	public GameObject limb;
 	public int limbsCount = 4;
@@ -13,19 +13,19 @@ public class QutJr : MonoBehaviour
 	private float minLowerArmAngle = -1f;
 	private float maxUpperArmAngle = 1f;
 	private float minUpperArmAngle = 0;
-	private float maxBaseAngle = 1.25f;
-	private float minBaseAngle = -0.75f;
-	private float LowerArmSpeed = 2f;
-	private float UpperArmSpeed = 2f;
-	private float BaseSpeed = 1f;
+	private float maxBaseAngle = 1f;
+	private float minBaseAngle = -0.5f;
+	private float LowerArmSpeed = 1f;
+	private float UpperArmSpeed = 1f;
+	private float BaseSpeed = 1.5f;
 	private float maxX = 15f;
 	private float minX = -15f;
 	private float maxY = 9f;
 	private float minY = 0f;
 	private float positionX = 0;
 	private float positionY = 0;
-	private float translationSpeedX = 4f;
-	private float translationSpeedY = 6f;
+	private float translationSpeedX = -3f;
+	private float translationSpeedY = -8f;
 	private float test = 3f;
 	private bool dead = false;
 	private bool moveDown = true;
@@ -190,44 +190,44 @@ public class QutJr : MonoBehaviour
 		// Head
 		Limb l1 = Instantiate(limb).GetComponent<Limb>();
 		l1.jointLocation = new Vector3(0, 0, 1);
-		l1.jointOffset = new Vector3(0, 2, 1);
+		l1.jointOffset = new Vector3(0, 1, 1);
 		l1.limbVertexLocations = new Vector3[] {
-												new Vector3(-0.1f,0,1),
-												new Vector3(-0.1f,1,1),
-												new Vector3(0.1f,1,1),
-												new Vector3(0.1f,0,1)
+												new Vector3(-0.05f,0,1),
+												new Vector3(-0.05f,0.5f,1),
+												new Vector3(0.05f,0.5f,1),
+												new Vector3(0.05f,0,1)
 		};
 		l1.material = material;
-		l1.color = new Color32(66, 133, 244, 255);
+		l1.color = new Color32(219, 68, 55, 255);
 		limbs[0] = l1;
 
 		//Lower Arm
 		Limb l2 = Instantiate(limb).GetComponent<Limb>();
-		l2.jointLocation = new Vector3(0, 2, 1);
-		l2.jointOffset = new Vector3(0, 2, 1);
+		l2.jointLocation = new Vector3(0, 1, 1);
+		l2.jointOffset = new Vector3(0, 1, 1);
 		l2.limbVertexLocations = new Vector3[] {
-												new Vector3(-0.25f,0,1),
-												new Vector3(-0.25f,2,1),
-												new Vector3(0.25f,2,1),
-												new Vector3(0.25f,0,1)
+												new Vector3(-0.125f,0,1),
+												new Vector3(-0.125f,1,1),
+												new Vector3(0.125f,1,1),
+												new Vector3(0.125f,0,1)
 				};
 		l2.material = material;
-		l2.color = new Color32(219, 68, 55, 255);
+		l2.color = new Color32(66, 133, 244, 255);
 		l2.child = l1;
 		limbs[1] = l2;
 
 		// Upper Arm
 		Limb l3 = Instantiate(limb).GetComponent<Limb>();
-		l3.jointLocation = new Vector3(0, 2, 1);
-		l3.jointOffset = new Vector3(0, 2, 1);
+		l3.jointLocation = new Vector3(0, 1, 1);
+		l3.jointOffset = new Vector3(0, 1, 1);
 		l3.limbVertexLocations = new Vector3[] {
-												new Vector3(-0.25f,0,1),
-												new Vector3(-0.25f,2,1),
-												new Vector3(0.25f,2,1),
-												new Vector3(0.25f,0,1)
+												new Vector3(-0.125f,0,1),
+												new Vector3(-0.125f,1,1),
+												new Vector3(0.125f,1,1),
+												new Vector3(0.125f,0,1)
 				};
 		l3.material = material;
-		l3.color = new Color32(244, 180, 0, 255);
+		l3.color = new Color32(15, 157, 88, 255);
 		l3.child = l2;
 		limbs[2] = l3;
 
@@ -236,13 +236,13 @@ public class QutJr : MonoBehaviour
 		l4.jointLocation = new Vector3(0, 0, 1);
 		l4.jointOffset = new Vector3(0, 0, 1);
 		l4.limbVertexLocations = new Vector3[] {
-												new Vector3(-1,-1f,1),
-												new Vector3(-1,0,1),
-												new Vector3(1,0,1),
-												new Vector3(1,-1f,1)
+												new Vector3(-0.5f,-1f,1),
+												new Vector3(-0.5f,0,1),
+												new Vector3(0.5f,0,1),
+												new Vector3(0.5f,-1f,1)
 				};
 		l4.material = material;
-		l4.color = new Color32(15, 157, 88, 255);
+		l4.color = new Color32(244, 180, 0, 255);
 		l4.child = l3;
 		limbs[3] = l4;
 	}
