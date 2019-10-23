@@ -192,10 +192,10 @@ public class QutJr : MonoBehaviour
 		l1.jointLocation = new Vector3(0, 0, 1);
 		l1.jointOffset = new Vector3(0, 2, 1);
 		l1.limbVertexLocations = new Vector3[] {
-												new Vector3(-0.1f,0,1),
-												new Vector3(-0.1f,1,1),
-												new Vector3(0.1f,1,1),
-												new Vector3(0.1f,0,1)
+												new Vector3(-0.5f,0,1),
+												new Vector3(-1.25f,1,1),
+												new Vector3(1.25f,1,1),
+												new Vector3(0.5f,0,1)
 		};
 		l1.material = material;
 		l1.color = new Color32(66, 133, 244, 255);
