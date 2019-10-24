@@ -152,6 +152,8 @@ MonoBehaviour:
   limb: {fileID: 706931415825997027, guid: d76c5abee26233f41acd1c57284c216f, type: 3}
   limbsCount: 4
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  positionX: 0
+  positionY: 0
 --- !u!4 &390607066
 Transform:
   m_ObjectHideFlags: 0
@@ -177,6 +179,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -192,6 +195,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0c1c9bf96fe494bb28df92a20336e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jr: {fileID: 2130168857}
+  jrjr: {fileID: 390607065}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -319,12 +336,12 @@ PrefabInstance:
     - target: {fileID: 6791814520875316492, guid: 098b1c1f1dad2b64abb2c53fd224b389,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6791814520875316492, guid: 098b1c1f1dad2b64abb2c53fd224b389,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 098b1c1f1dad2b64abb2c53fd224b389, type: 3}
@@ -384,11 +401,11 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 20, y: -1, z: 1}
-  - {x: -20, y: -1, z: 1}
+  - {x: 50, y: -1, z: 1}
+  - {x: -50, y: -1, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -501,3 +518,5 @@ MonoBehaviour:
   limb: {fileID: 706931415825997027, guid: d76c5abee26233f41acd1c57284c216f, type: 3}
   limbsCount: 4
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  positionX: 0
+  positionY: 0

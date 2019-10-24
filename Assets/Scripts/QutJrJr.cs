@@ -18,17 +18,17 @@ public class QutJrJr : MonoBehaviour
 	private float LowerArmSpeed = 1f;
 	private float UpperArmSpeed = 1f;
 	private float BaseSpeed = 1.5f;
-	private float maxX = 15f;
-	private float minX = -15f;
+	private float maxX = 40f;
+	private float minX = -40f;
 	private float maxY = 9f;
 	private float minY = 0f;
-	private float positionX = 0;
-	private float positionY = 0;
+	public float positionX = 0;
+	public float positionY = 0;
 	private float translationSpeedX = -3f;
 	private float translationSpeedY = -8f;
-	private float test = 3f;
 	private bool dead = false;
 	private bool moveDown = true;
+	private bool moveForward = true;
 	void Start()
 	{
 		DrawJr();
@@ -61,6 +61,16 @@ public class QutJrJr : MonoBehaviour
 		{
 			Base.MoveByOffset(new Vector3(0, minY - positionY, 0));
 			positionY = minY;
+		}
+
+		if (positionX == maxX)
+		{
+			Flip();
+		}
+
+		if (positionX == minX)
+		{
+			Flip();
 		}
 
 		if (Input.GetKey(KeyCode.Z))
@@ -155,6 +165,7 @@ public class QutJrJr : MonoBehaviour
 				if (translationSpeedX < 0)
 				{
 					translationSpeedX = -translationSpeedX;
+					Flip();
 				}
 			}
 			else if (Input.GetKey(KeyCode.A))
@@ -162,6 +173,7 @@ public class QutJrJr : MonoBehaviour
 				if (translationSpeedX > 0)
 				{
 					translationSpeedX = -translationSpeedX;
+					Flip();
 				}
 			}
 
@@ -169,6 +181,15 @@ public class QutJrJr : MonoBehaviour
 			var newPositionY = 0f;
 
 			if (Input.GetKey(KeyCode.W))
+			{
+				moveForward = false;
+			}
+			else if (Input.GetKey(KeyCode.S))
+			{
+				moveForward = true;
+			}
+
+			if (!moveForward)
 			{
 				newPositionY = Mathf.Sin(Time.time * translationSpeedY) * Time.deltaTime * maxY;
 			}
@@ -245,5 +266,18 @@ public class QutJrJr : MonoBehaviour
 		l4.color = new Color32(244, 180, 0, 255);
 		l4.child = l3;
 		limbs[3] = l4;
+	}
+
+	void Flip()
+	{
+		var newBaseAngle = maxBaseAngle;
+		maxBaseAngle = -minBaseAngle;
+		minBaseAngle = -newBaseAngle;
+		var newUpperArmAngle = maxUpperArmAngle;
+		maxUpperArmAngle = -minUpperArmAngle;
+		minUpperArmAngle = -newUpperArmAngle;
+		var newLowerArmAngle = maxLowerArmAngle;
+		maxLowerArmAngle = -minLowerArmAngle;
+		minLowerArmAngle = -newLowerArmAngle;
 	}
 }

@@ -18,20 +18,21 @@ public class QutJr : MonoBehaviour
 	private float LowerArmSpeed = 2f;
 	private float UpperArmSpeed = 2f;
 	private float BaseSpeed = 1f;
-	private float maxX = 15f;
-	private float minX = -15f;
+	private float maxX = 40f;
+	private float minX = -40f;
 	private float maxY = 9f;
 	private float minY = 0f;
-	private float positionX = 0;
-	private float positionY = 0;
+	public float positionX = 0;
+	public float positionY = 0;
 	private float translationSpeedX = 4f;
 	private float translationSpeedY = 6f;
-	private float test = 3f;
 	private bool dead = false;
 	private bool moveDown = true;
+	private bool moveForward = true;
 	void Start()
 	{
 		DrawJr();
+		Flip();
 	}
 
 	void Update()
@@ -61,6 +62,16 @@ public class QutJr : MonoBehaviour
 		{
 			Base.MoveByOffset(new Vector3(0, minY - positionY, 0));
 			positionY = minY;
+		}
+
+		if (positionX == maxX)
+		{
+			Flip();
+		}
+
+		if (positionX == minX)
+		{
+			Flip();
 		}
 
 		if (Input.GetKey(KeyCode.Z))
@@ -155,6 +166,7 @@ public class QutJr : MonoBehaviour
 				if (translationSpeedX < 0)
 				{
 					translationSpeedX = -translationSpeedX;
+					Flip();
 				}
 			}
 			else if (Input.GetKey(KeyCode.A))
@@ -162,6 +174,7 @@ public class QutJr : MonoBehaviour
 				if (translationSpeedX > 0)
 				{
 					translationSpeedX = -translationSpeedX;
+					Flip();
 				}
 			}
 
@@ -170,6 +183,15 @@ public class QutJr : MonoBehaviour
 
 			if (Input.GetKey(KeyCode.W))
 			{
+				moveForward = false;
+			}
+			else if (Input.GetKey(KeyCode.S))
+			{
+				moveForward = true;
+			}
+
+			if (!moveForward)
+			{
 				newPositionY = Mathf.Sin(Time.time * translationSpeedY) * Time.deltaTime * maxY;
 			}
 			else
@@ -177,6 +199,7 @@ public class QutJr : MonoBehaviour
 				newPositionX = translationSpeedX * Time.deltaTime;
 				newPositionY = Mathf.Sin(Time.time * translationSpeedY) * Time.deltaTime * maxY;
 			}
+
 			positionX += newPositionX;
 			positionY += newPositionY;
 
@@ -245,5 +268,17 @@ public class QutJr : MonoBehaviour
 		l4.color = new Color32(15, 157, 88, 255);
 		l4.child = l3;
 		limbs[3] = l4;
+	}
+	void Flip()
+	{
+		var newBaseAngle = maxBaseAngle;
+		maxBaseAngle = -minBaseAngle;
+		minBaseAngle = -newBaseAngle;
+		var newUpperArmAngle = maxUpperArmAngle;
+		maxUpperArmAngle = -minUpperArmAngle;
+		minUpperArmAngle = -newUpperArmAngle;
+		var newLowerArmAngle = maxLowerArmAngle;
+		maxLowerArmAngle = -minLowerArmAngle;
+		minLowerArmAngle = -newLowerArmAngle;
 	}
 }
